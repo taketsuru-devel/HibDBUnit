@@ -3,9 +3,6 @@ package tools.followedwind.hibdbunit.test;
 // Generated 2015/01/01 18:42:00 by Hibernate Tools 4.0.0
 
 import java.util.List;
-import java.util.Map;
-
-import javax.naming.InitialContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,7 +16,7 @@ import static org.hibernate.criterion.Example.create;
 
 /**
  * Home object for domain model class Testtable.
- * @see orz.test.testpackage.rev.Testtable
+ * @see tools.followdwind.hibdbunit.test.Testtable
  * @author Hibernate Tools
  */
 public class TesttableHome {
@@ -68,6 +65,7 @@ public class TesttableHome {
 		}
 	}
 
+	@SuppressWarnings("deprecation") //add
 	public void attachClean(Testtable instance) {
 		log.debug("attaching clean Testtable instance");
 		try {
@@ -127,6 +125,7 @@ public class TesttableHome {
 	public List<Testtable> findByExample(Testtable instance) {
 		log.debug("finding Testtable instance by example");
 		try {
+			@SuppressWarnings("unchecked") //add
 			List<Testtable> results = (List<Testtable>) sessionFactory
 					//.getCurrentSession()
 					.openSession()

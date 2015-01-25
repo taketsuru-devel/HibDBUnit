@@ -4,7 +4,6 @@ import java.util.Properties;
 
 import org.dbunit.DBTestCase;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.slf4j.Logger;
@@ -16,6 +15,7 @@ import org.slf4j.LoggerFactory;
  * Hibernateの設定をそのままDBUnitに流用したい<br>
  * ついでにテスト前のデータを一時退避させておき、テスト後に復帰させる<br>
  * 本クラスを継承し、引数が空のコンストラクタ内でset()をコールし設定を読み込ませる<br>
+ * 使用例はsrc/test/java/HibDBUnitTest.javaを参照
  * @author followedwind
  * @version 1.0
  */
@@ -35,7 +35,7 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * @throws Exception 設定
 	 */
 	protected HibDBUnit( HibDBUnitSetting setting ) throws Exception {
-		this.set(setting);
+		this.applySetting(setting);
 	}
 	
 	/**
@@ -43,11 +43,9 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * @param setting 設定クラス
 	 * @throws IllegalStateException 設定クラスにおいて設定漏れがある場合
 	 */
-	public void set( HibDBUnitSetting setting ) throws IllegalStateException {
-		this.backup = new HibDBBackup();
+	public void applySetting( HibDBUnitSetting setting ) throws IllegalStateException {
+		this.backup = new HibDBBackup(setting.getTmpFileName());
 		this.setting = setting;
-		assertNotNull("Setting is null", this.setting);
-		assertNotNull("Setting is null", this.setting);
 		assertNotNull("Setting is null", this.setting);
 		
 		/*
@@ -65,22 +63,22 @@ public abstract class HibDBUnit extends DBTestCase {
 	}
 	
 	@Override
-	/**
-	 * @inheritDoc
-	 */
+	/** @inheritDoc */
 	protected IDataSet getDataSet() throws Exception {
 		return this.setting.getDataSet();
 	}
 
 	@Before
+	/** @inheritDoc */
 	public void setUp() throws Exception {
 		logger.info("backup of existing data start");
-		this.backup.store(this.getDataSet().getTableNames(), this.getDatabaseTester());
+		this.backup.backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
 		logger.info("backup of existing data end");
 		super.setUp();
 	}
 	
 	@After
+	/** @inheritDoc */
 	public void tearDown() throws Exception{
 		super.tearDown();
 		logger.info("restore of backup data start");
@@ -88,14 +86,4 @@ public abstract class HibDBUnit extends DBTestCase {
 		logger.info("restore of backup data end");
 	}
 
-	@Override
-	protected DatabaseOperation getSetUpOperation() throws Exception {
-		return DatabaseOperation.CLEAN_INSERT;
-	}
-
-	@Override
-	protected DatabaseOperation getTearDownOperation() throws Exception {
-		return DatabaseOperation.CLEAN_INSERT;
-	}
-	
 }

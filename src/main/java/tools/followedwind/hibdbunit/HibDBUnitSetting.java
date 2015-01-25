@@ -21,6 +21,7 @@ public class HibDBUnitSetting {
 	private Configuration conf = null;
 	private IDataSet dataset = null;
 	private List<HibDBUnitRelation> rel = null;
+	private String tmpfilename = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HibDBUnitSetting.class);
 
@@ -76,6 +77,11 @@ public class HibDBUnitSetting {
 		return this;
 	}
 	
+	public HibDBUnitSetting setTmpFileName( String tmpfilename ){
+		this.tmpfilename = tmpfilename;
+		return this;
+	}
+	
 	public Configuration getConf() {
 		return this.conf;
 	}
@@ -85,5 +91,7 @@ public class HibDBUnitSetting {
 	public IDataSet getDataSet() {
 		return this.dataset;
 	}
-	
+	public String getTmpFileName(){
+		return this.tmpfilename;
+	}
 }
