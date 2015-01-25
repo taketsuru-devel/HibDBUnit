@@ -23,7 +23,6 @@ public abstract class HibDBUnit extends DBTestCase {
 	
 	private HibDBUnitSetting setting;
 	private HibDBBackup backup;
-	private DBUnitDataProvider provider;
 
 	private static final Logger logger = LoggerFactory.getLogger(HibDBUnit.class);
 	
@@ -70,12 +69,11 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * @inheritDoc
 	 */
 	protected IDataSet getDataSet() throws Exception {
-		return this.provider.getData();
+		return this.setting.getDataSet();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		this.provider = this.setting;
 		logger.info("backup of existing data start");
 		this.backup.store(this.getDataSet().getTableNames(), this.getDatabaseTester());
 		logger.info("backup of existing data end");
@@ -84,14 +82,12 @@ public abstract class HibDBUnit extends DBTestCase {
 	
 	@After
 	public void tearDown() throws Exception{
-		this.provider = this.backup;
 		super.tearDown();
 		logger.info("restore of backup data start");
 		this.backup.restore(this.getDatabaseTester());
 		logger.info("restore of backup data end");
 	}
 
-	/*
 	@Override
 	protected DatabaseOperation getSetUpOperation() throws Exception {
 		return DatabaseOperation.CLEAN_INSERT;
@@ -101,7 +97,5 @@ public abstract class HibDBUnit extends DBTestCase {
 	protected DatabaseOperation getTearDownOperation() throws Exception {
 		return DatabaseOperation.CLEAN_INSERT;
 	}
-	*/
-	
 	
 }

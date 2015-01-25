@@ -12,7 +12,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 
-public class HibDBBackup implements DBUnitDataProvider {
+public class HibDBBackup {
 	
 	protected IDataSet bkdataset = null;
 	private File bkfile;
@@ -70,10 +70,5 @@ public class HibDBBackup implements DBUnitDataProvider {
 				}
 			}
 		}
-	}
-	
-	@Override
-	public IDataSet getData() {
-		return this.bkdataset;
 	}
 }

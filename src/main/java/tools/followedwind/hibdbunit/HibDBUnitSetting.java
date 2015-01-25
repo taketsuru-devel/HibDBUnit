@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * @author followedwind
  * @version 1.0
  */
-public class HibDBUnitSetting implements DBUnitDataProvider {
+public class HibDBUnitSetting {
 	private Configuration conf = null;
 	private IDataSet dataset = null;
 	private List<HibDBUnitRelation> rel = null;
@@ -82,9 +82,7 @@ public class HibDBUnitSetting implements DBUnitDataProvider {
 	public List<HibDBUnitRelation> getRelation(){
 		return this.rel;
 	}
-	
-	@Override
-	public IDataSet getData() {
+	public IDataSet getDataSet() {
 		return this.dataset;
 	}
 	
