@@ -21,16 +21,15 @@ import org.slf4j.LoggerFactory;
 public class HibDBBackup {
 	
 	private File bkfile;
-	private String tmpfilename;
+	private String filename = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HibDBBackup.class);
 
 	public HibDBBackup(){
-		this(null);
 	}
 	
-	public HibDBBackup( String tmpfilename ){
-		this.tmpfilename = tmpfilename;
+	public void setBackupFileName( String filename ){
+		this.filename = filename;
 	}
 	
 	/**
@@ -39,8 +38,7 @@ public class HibDBBackup {
 	 * @param tester
 	 * @throws Exception
 	 */
-	public void backup( String[] tablenames, IDatabaseTester tester )
-		throws Exception {
+	public void backup( String[] tablenames, IDatabaseTester tester ) throws Exception {
 		IDatabaseConnection conn = null;
 		try {
 			conn = tester.getConnection();
@@ -49,16 +47,15 @@ public class HibDBBackup {
 				dataset.addTable(table);
 				logger.info("back up table: {}",table);
 			}
-			if ( this.tmpfilename == null ){
+			if ( this.filename == null ){
 				this.bkfile = File.createTempFile("temp",".xml");
 				this.bkfile.deleteOnExit();
 				logger.info("using tmpfile {}, delete on exit",this.bkfile.getPath());
 			} else {
-				this.bkfile = File.createTempFile(this.tmpfilename,".xml");
+				this.bkfile = File.createTempFile(this.filename,".xml");
 				logger.info("using tmpfile {}",this.bkfile.getPath());
 			}
 			this.saveFile(dataset,this.bkfile);
-			//FlatXmlDataSet.write(dataset,new FileOutputStream(this.bkfile));
 		} catch ( Exception e){
 			throw e;
 		} finally {
@@ -76,13 +73,10 @@ public class HibDBBackup {
 		FlatXmlDataSet.write(dataset,new FileOutputStream(tmpfile));
 	}
 	
-	public void restore( IDatabaseTester tester )
-		throws Exception {
+	public void restore( IDatabaseTester tester ) throws Exception {
 		IDatabaseConnection conn = null;
 		try {
 			conn = tester.getConnection();
-			//IDataSet dataset = new FlatXmlDataSetBuilder().build(this.bkfile);
-			//DatabaseOperation.CLEAN_INSERT.execute(conn,dataset);
 			DatabaseOperation.CLEAN_INSERT.execute(conn,this.loadFile(this.bkfile));
 		} catch ( Exception e ){
 			throw e;

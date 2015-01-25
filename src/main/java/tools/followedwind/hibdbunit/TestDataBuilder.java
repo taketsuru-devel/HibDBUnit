@@ -54,8 +54,8 @@ public class TestDataBuilder {
 				dataset = new FlatXmlDataSetBuilder().build(file);
 			} else if ( suffix.equals("csv") ){
 				dataset = new CsvDataSet(file);
-			} else if ( suffix.equals("xls") ){
-				dataset = new XlsDataSet(file);
+//			} else if ( suffix.equals("xls") ){
+//				dataset = new XlsDataSet(file);
 			} else {
 				throw new IllegalArgumentException("not support suffix: "+suffix);
 			}

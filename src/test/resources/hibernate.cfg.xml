@@ -6,12 +6,13 @@
     <session-factory>
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password">hibernatetest</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernatetest</property>
-        <property name="hibernate.connection.username">hibernatetest</property>
+        <property name="hibernate.connection.password">hibtestpass</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/hibtestdb</property>
+        <property name="hibernate.connection.username">hibtestuser</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="current_session_context_class">thread</property>
-        <mapping resource="Testtable.hbm.xml" />
+        <mapping resource="TesttableXml.hbm.xml" />
+        <mapping resource="TesttableCsv.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

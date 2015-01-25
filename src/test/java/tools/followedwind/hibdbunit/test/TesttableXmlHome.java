@@ -15,13 +15,13 @@ import org.hibernate.cfg.Configuration;
 import static org.hibernate.criterion.Example.create;
 
 /**
- * Home object for domain model class Testtable.
- * @see tools.followdwind.hibdbunit.test.Testtable
+ * Home object for domain model class TesttableXml.
+ * @see tools.followdwind.hibdbunit.test.TesttableXml
  * @author Hibernate Tools
  */
-public class TesttableHome {
+public class TesttableXmlHome {
 
-	private static final Log log = LogFactory.getLog(TesttableHome.class);
+	private static final Log log = LogFactory.getLog(TesttableXmlHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -41,7 +41,7 @@ public class TesttableHome {
 		}
 	}
 
-	public void persist(Testtable transientInstance) {
+	public void persist(TesttableXml transientInstance) {
 		log.debug("persisting Testtable instance");
 		try {
 			//sessionFactory.getCurrentSession().persist(transientInstance);
@@ -53,7 +53,7 @@ public class TesttableHome {
 		}
 	}
 
-	public void attachDirty(Testtable instance) {
+	public void attachDirty(TesttableXml instance) {
 		log.debug("attaching dirty Testtable instance");
 		try {
 			//sessionFactory.getCurrentSession().saveOrUpdate(instance);
@@ -66,7 +66,7 @@ public class TesttableHome {
 	}
 
 	@SuppressWarnings("deprecation") //add
-	public void attachClean(Testtable instance) {
+	public void attachClean(TesttableXml instance) {
 		log.debug("attaching clean Testtable instance");
 		try {
 			//sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
@@ -78,7 +78,7 @@ public class TesttableHome {
 		}
 	}
 
-	public void delete(Testtable persistentInstance) {
+	public void delete(TesttableXml persistentInstance) {
 		log.debug("deleting Testtable instance");
 		try {
 			//sessionFactory.getCurrentSession().delete(persistentInstance);
@@ -90,11 +90,11 @@ public class TesttableHome {
 		}
 	}
 
-	public Testtable merge(Testtable detachedInstance) {
+	public TesttableXml merge(TesttableXml detachedInstance) {
 		log.debug("merging Testtable instance");
 		try {
-			//Testtable result = (Testtable) sessionFactory.getCurrentSession()
-			Testtable result = (Testtable) sessionFactory.openSession()
+			//TesttableXml result = (TesttableXml) sessionFactory.getCurrentSession()
+			TesttableXml result = (TesttableXml) sessionFactory.openSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -104,12 +104,12 @@ public class TesttableHome {
 		}
 	}
 
-	public Testtable findById(java.lang.Integer id) {
+	public TesttableXml findById(java.lang.Integer id) {
 		log.debug("getting Testtable instance with id: " + id);
 		try {
-			//Testtable instance = (Testtable) sessionFactory.getCurrentSession()
-			Testtable instance = (Testtable) sessionFactory.openSession()
-					.get("tools.followedwind.hibdbunit.test.Testtable", id);
+			//TesttableXml instance = (TesttableXml) sessionFactory.getCurrentSession()
+			TesttableXml instance = (TesttableXml) sessionFactory.openSession()
+					.get("tools.followedwind.hibdbunit.test.TesttableXml", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -122,14 +122,14 @@ public class TesttableHome {
 		}
 	}
 
-	public List<Testtable> findByExample(Testtable instance) {
+	public List<TesttableXml> findByExample(TesttableXml instance) {
 		log.debug("finding Testtable instance by example");
 		try {
 			@SuppressWarnings("unchecked") //add
-			List<Testtable> results = (List<Testtable>) sessionFactory
+			List<TesttableXml> results = (List<TesttableXml>) sessionFactory
 					//.getCurrentSession()
 					.openSession()
-					.createCriteria("tools.followedwind.hibdbunit.test.Testtable")
+					.createCriteria("tools.followedwind.hibdbunit.test.TesttableXml")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

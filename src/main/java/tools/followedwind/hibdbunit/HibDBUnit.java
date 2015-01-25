@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 public abstract class HibDBUnit extends DBTestCase {
 	
 	private HibDBUnitSetting setting;
-	private HibDBBackup backup;
 
 	private static final Logger logger = LoggerFactory.getLogger(HibDBUnit.class);
 	
@@ -44,7 +43,6 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * @throws IllegalStateException 設定クラスにおいて設定漏れがある場合
 	 */
 	public void applySetting( HibDBUnitSetting setting ) throws IllegalStateException {
-		this.backup = new HibDBBackup(setting.getTmpFileName());
 		this.setting = setting;
 		assertNotNull("Setting is null", this.setting);
 		
@@ -72,7 +70,7 @@ public abstract class HibDBUnit extends DBTestCase {
 	/** @inheritDoc */
 	public void setUp() throws Exception {
 		logger.info("backup of existing data start");
-		this.backup.backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
+		this.setting.getBackupObj().backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
 		logger.info("backup of existing data end");
 		super.setUp();
 	}
@@ -82,7 +80,7 @@ public abstract class HibDBUnit extends DBTestCase {
 	public void tearDown() throws Exception{
 		super.tearDown();
 		logger.info("restore of backup data start");
-		this.backup.restore(this.getDatabaseTester());
+		this.setting.getBackupObj().restore(this.getDatabaseTester());
 		logger.info("restore of backup data end");
 	}
 

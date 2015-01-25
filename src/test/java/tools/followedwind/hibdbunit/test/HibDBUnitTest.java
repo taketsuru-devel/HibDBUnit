@@ -11,10 +11,10 @@ public class HibDBUnitTest extends HibDBUnit {
 	public HibDBUnitTest(){
 		try {
 			super.applySetting(new HibDBUnitSetting()
-//				.setHibCfg("/root/workspace/hibdbunit/src/test/resources/hibernate.cfg.xml")
 				.setHibCfg("src/test/resources/hibernate.cfg.xml")
 				.setTestData(new String[]{
-						"/root/text.xml"
+						"src/test/resources/testdata.xml",
+						"src/test/resources/testdata.csv" //csvはディレクトリで渡す
 				}));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -22,10 +22,15 @@ public class HibDBUnitTest extends HibDBUnit {
 	}
 	
 	@Test
-	public void test(){
-		TesttableHome th = new TesttableHome();
-		Testtable t = new Testtable();
-		t = th.findById(1);
+	public void test_testtablecsv(){
+		TesttableCsvHome thcsv = new TesttableCsvHome();
+		TesttableCsv t = thcsv.findById(3);
+		assertEquals((int)t.getScore(),5678);
+	}
+	@Test
+	public void test_testtablexml(){
+		TesttableXmlHome thxml = new TesttableXmlHome();
+		TesttableXml t = thxml.findById(1);
 		assertEquals(t.getData(),"tttt");
 	}
 }

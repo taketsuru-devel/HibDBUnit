@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Hibernateの設定やテストデータを保持するクラス<br>
+ * 各設定は自身のオブジェクトを返すためチェーン形式で設定可能
  * @author followedwind
  * @version 1.0
  */
@@ -21,12 +22,13 @@ public class HibDBUnitSetting {
 	private Configuration conf = null;
 	private IDataSet dataset = null;
 	private List<HibDBUnitRelation> rel = null;
-	private String tmpfilename = null;
+	private HibDBBackup backup = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HibDBUnitSetting.class);
 
 	public HibDBUnitSetting(){
 		this.rel = Arrays.asList(HibDBUnitRelationDefault.values());
+		this.backup = new HibDBBackup();
 	}
 
 	/**
@@ -69,16 +71,33 @@ public class HibDBUnitSetting {
 		return this;
 	}
 	/**
-	 * 指定されたHibernateの設定とDBUnitの関連付けリストを使用する
+	 * 指定されたHibernateの設定とDBUnitの関連付けリストを使用する<br>
+	 * この項目は省略可能で、省略された場合はHibDBUnitRelationDefaultの各enumを使用する
 	 * @return 自身
 	 */
 	public HibDBUnitSetting setRelationList( List<HibDBUnitRelation> rel ){
 		this.rel = rel;
 		return this;
 	}
+	/**
+	 * 既存のデータベースのバックアップファイル名を指定する<br>
+	 * この項目は省略可能で、省略された場合はバックアップファイルを使用後に削除する
+	 * @param filename バックアップファイル名
+	 * @return 自身
+	 */
+	public HibDBUnitSetting setBackUpFileName( String filename ){
+		this.backup.setBackupFileName(filename);;
+		return this;
+	}
 	
-	public HibDBUnitSetting setTmpFileName( String tmpfilename ){
-		this.tmpfilename = tmpfilename;
+	/**
+	 * 既存のデータベースのバックアップオブジェクトを指定する<br>
+	 * この項目は省略可能で、省略された場合はHibDBBackupのインスタンスを使用する
+	 * @param backup バックアップオブジェクト
+	 * @return 自身
+	 */
+	public HibDBUnitSetting setBackupObj( HibDBBackup backup ){
+		this.backup = backup;
 		return this;
 	}
 	
@@ -91,7 +110,7 @@ public class HibDBUnitSetting {
 	public IDataSet getDataSet() {
 		return this.dataset;
 	}
-	public String getTmpFileName(){
-		return this.tmpfilename;
+	public HibDBBackup getBackupObj(){
+		return this.backup;
 	}
 }
