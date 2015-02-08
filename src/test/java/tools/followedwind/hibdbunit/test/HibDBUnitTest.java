@@ -6,7 +6,18 @@ import tools.followedwind.hibdbunit.HibDBUnit;
 import tools.followedwind.hibdbunit.HibDBUnitSetting;
 
 
-
+/**
+ * HibDBUnitのテストケース<br>
+ * 以下の場合を想定
+ * testtablexml,testtablecsvに対してテスト実施
+ * 定義はtestenv.sqlに記載
+ * Hibernate設定ファイル：src/test/resources/hibernate.cfg.xml
+ * テストデータ設定ファイル：src/test/resources/testdata.xml
+ *                       src/test/resources/testdata.csv
+ * それぞれのテーブルに対してテスト実施、完了時にテスト前のデータに復元
+ * @author followedwind
+ * @version 1.0
+ */
 public class HibDBUnitTest extends HibDBUnit {
 	public HibDBUnitTest(){
 		try {
@@ -18,6 +29,7 @@ public class HibDBUnitTest extends HibDBUnit {
 				}));
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("error on HibDBUnit constructer");
 		}
 	}
 	

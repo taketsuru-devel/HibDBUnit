@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * Hibernateの設定をそのままDBUnitに流用したい<br>
  * ついでにテスト前のデータを一時退避させておき、テスト後に復帰させる<br>
  * 本クラスを継承し、引数が空のコンストラクタ内でset()をコールし設定を読み込ませる<br>
- * 使用例はsrc/test/java/HibDBUnitTest.javaを参照
+ * 使用例は{@link tools.followedwind.hibdbunit.test.HibDBUnitTest}を参照
  * @author followedwind
  * @version 1.0
  */
@@ -25,20 +25,26 @@ public abstract class HibDBUnit extends DBTestCase {
 
 	private static final Logger logger = LoggerFactory.getLogger(HibDBUnit.class);
 	
+	/**
+	 * 後で設定を反映する場合のコンストラクタ
+	 * 継承時にいろいろやってから設定を反映したい場合、こちらをオーバーライド
+	 */
 	protected HibDBUnit(){
 	}
 	
 	/**
-	 * 
-	 * @param setting
-	 * @throws Exception 設定
+	 * 設定の反映を同時に行うコンストラクタ
+	 * HibDBUnitSettingがチェーンで設定できるので、HibDBUnitTestのように設定オブジェクト作成と反映を同時に行うことも可能
+	 * @param setting 設定オブジェクト
+	 * @throws Exception 設定オブジェクトにおいて項目抜けなどの例外が発生した場合
 	 */
 	protected HibDBUnit( HibDBUnitSetting setting ) throws Exception {
 		this.applySetting(setting);
 	}
 	
 	/**
-	 * Hibernateの設定ファイルやテストデータのファイルを指定した設定クラスを格納
+	 * Hibernateの設定ファイルやテストデータのファイルを指定した設定クラスを格納<br>
+	 * 設定クラスがNullである場合はテストを中断する<br>
 	 * @param setting 設定クラス
 	 * @throws IllegalStateException 設定クラスにおいて設定漏れがある場合
 	 */

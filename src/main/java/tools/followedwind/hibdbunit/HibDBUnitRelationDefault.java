@@ -5,9 +5,11 @@ import org.hibernate.cfg.AvailableSettings;
 
 
 /**
- * 
+ * HibernateとDBUnitとの関連付けオブジェクトのMySQLにおける実装例<br>
+ * ドライバクラス、データベースURL、ユーザーネーム、パスワードを実装<br>
+ * 他のDBなのでこれら以外のパラメータが必要な場合はそれを実装し、HibDBUnitのコンストラクタに渡してください
  * @author followedwind
- *
+ * @version 1.0
  */
 public enum HibDBUnitRelationDefault implements HibDBUnitRelation {
 	DRIVER(
@@ -28,12 +30,16 @@ public enum HibDBUnitRelationDefault implements HibDBUnitRelation {
 		this.DBUnit_key = DBUnit_key;
 		this.Hibernate_key = Hibernate_key;
 	}
+	
+	/**	@interitDoc */
 	public String getDBUnit_key(){
 		return this.DBUnit_key;
 	}
+	/**	@interitDoc */
 	public String getHibernate_key(){
 		return this.Hibernate_key;
 	}
+	/**	@interitDoc */
 	public String getType(){
 		return this.toString();
 	}

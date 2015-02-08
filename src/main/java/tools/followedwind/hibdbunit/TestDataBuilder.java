@@ -7,13 +7,15 @@ import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.csv.CsvDataSet;
-import org.dbunit.dataset.excel.XlsDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 
 /**
- * 
+ * 指定されたファイルからテストデータを作成<br>
+ * データ形式はDBUnitのDataSetBuilderに従う<br>
+ * データ形式は拡張子から判断<br>
+ * 現状ではxml,csvのみ対応
  * @author followedwind
- *
+ * @version 1.0
  */
 public class TestDataBuilder {
 	
@@ -66,7 +68,9 @@ public class TestDataBuilder {
 	}
 
 	/**
-	 * 拡張子取得
+	 * 拡張子取得<br>
+	 * ファイル名の最も後ろにあるドットから後を拡張子として認識する<br>
+	 * ドットの後に文字がない場合、ドットがない場合はnullを返す
 	 * @param filename ファイル名
 	 * @return 拡張子
 	 */

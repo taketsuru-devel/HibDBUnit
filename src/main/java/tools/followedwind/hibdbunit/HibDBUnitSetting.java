@@ -100,16 +100,35 @@ public class HibDBUnitSetting {
 		this.backup = backup;
 		return this;
 	}
-	
+
+	/**
+	 * セットされたHibernateのConfigureオブジェクトを返す
+	 * @return セットされたHibernateのConfigureオブジェクト
+	 */
 	public Configuration getConf() {
 		return this.conf;
 	}
+	
+	/**
+	 * HibernateとDBUnitの関連付けオブジェクトを返す
+	 * @return HibernateとDBUnitの関連付け
+	 */
 	public List<HibDBUnitRelation> getRelation(){
 		return this.rel;
 	}
+	
+	/**
+	 * テストに使用するデータを返す
+	 * @return テストに使用するデータ
+	 */
 	public IDataSet getDataSet() {
 		return this.dataset;
 	}
+	
+	/**
+	 * テスト以前に存在していたデータベースのバックアップを返す
+	 * @return テスト以前に存在していたデータベースのバックアップ
+	 */
 	public HibDBBackup getBackupObj(){
 		return this.backup;
 	}
