@@ -8,13 +8,17 @@ import tools.followedwind.hibdbunit.HibDBUnitSetting;
 
 /**
  * HibDBUnitのテストケース<br>
- * 以下の場合を想定
- * testtablexml,testtablecsvに対してテスト実施
- * 定義はtestenv.sqlに記載
- * Hibernate設定ファイル：src/test/resources/hibernate.cfg.xml
- * テストデータ設定ファイル：src/test/resources/testdata.xml
- *                       src/test/resources/testdata.csv
- * それぞれのテーブルに対してテスト実施、完了時にテスト前のデータに復元
+ * 以下の動作を実装している<br>
+ * <ul>
+ * <li>testtablexml,testtablecsvに対してテスト実施</li>
+ * <li>定義はtestenv.sqlに記載</li>
+ * <li>Hibernate設定ファイル
+ *     <ul><li>src/test/resources/hibernate.cfg.xml</li></ul></li>
+ * <li>テストデータ設定ファイル
+ *     <ul><li>src/test/resources/testdata.xml</li>
+ *         <li>src/test/resources/testdata.csv</li></ul></li>
+ * <li>それぞれのテーブルに対してテスト実施、完了時にテスト前のデータに復元</li>
+ * </ul>
  * @author followedwind
  * @version 1.0
  */

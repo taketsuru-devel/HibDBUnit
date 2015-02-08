@@ -16,7 +16,7 @@ import static org.hibernate.criterion.Example.create;
 
 /**
  * Home object for domain model class TesttableXml.
- * @see tools.followdwind.hibdbunit.test.TesttableXml
+ * @see TesttableXml
  * @author Hibernate Tools
  */
 public class TesttableXmlHome {

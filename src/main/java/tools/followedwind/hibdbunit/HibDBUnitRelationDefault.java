@@ -31,15 +31,20 @@ public enum HibDBUnitRelationDefault implements HibDBUnitRelation {
 		this.Hibernate_key = Hibernate_key;
 	}
 	
-	/**	@interitDoc */
+	@Override
+	/** @inheritDoc */
 	public String getDBUnit_key(){
 		return this.DBUnit_key;
 	}
-	/**	@interitDoc */
+	
+	@Override
+	/** @inheritDoc */
 	public String getHibernate_key(){
 		return this.Hibernate_key;
 	}
-	/**	@interitDoc */
+
+	@Override
+	/** @inheritDoc */
 	public String getType(){
 		return this.toString();
 	}

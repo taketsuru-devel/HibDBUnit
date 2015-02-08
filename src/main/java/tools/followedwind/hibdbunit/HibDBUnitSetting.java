@@ -62,7 +62,7 @@ public class HibDBUnitSetting {
 	}
 	/**
 	 * 指定されたテストデータを使用する
-	 * @param dataset
+	 * @param dataset 使用するテストデータ
 	 * @return 自身
 	 */
 	public HibDBUnitSetting setTestData( IDataSet dataset ){
@@ -71,8 +71,11 @@ public class HibDBUnitSetting {
 		return this;
 	}
 	/**
-	 * 指定されたHibernateの設定とDBUnitの関連付けリストを使用する<br>
+	 * 指定されたHibernateの設定とDBUnitの関連付けオブジェクトのリストを使用する<br>
 	 * この項目は省略可能で、省略された場合はHibDBUnitRelationDefaultの各enumを使用する
+	 * @see HibDBUnitRelation
+	 * @see HibDBUnitRelationDefault
+	 * @param rel 使用する関連付けリスト
 	 * @return 自身
 	 */
 	public HibDBUnitSetting setRelationList( List<HibDBUnitRelation> rel ){

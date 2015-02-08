@@ -109,7 +109,6 @@ public class HibDBBackup {
 	 * 一時ファイルから元のデータを復元<br>
 	 * @param tester DataBaseTesterからコネクションを取得するために使用
 	 * @throws Exception DataBaseTesterからコネクションが取得できない場合
-	 * @throws DatabaseUnitException データベースとの接続で異常があった場合
 	 * @throws SQLException データベースとの接続で異常があった場合
 	 */
 	public void restore( IDatabaseTester tester ) throws Exception {

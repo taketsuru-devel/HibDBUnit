@@ -16,7 +16,7 @@ import static org.hibernate.criterion.Example.create;
 
 /**
  * Home object for domain model class TesttableCsv.
- * @see tools.followdwind.hibdbunit.test.TesttableCsv
+ * @see TesttableCsv
  * @author Hibernate Tools
  */
 public class TesttableCsvHome {
