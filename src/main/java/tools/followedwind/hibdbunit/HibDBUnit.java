@@ -31,6 +31,7 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * 継承時にいろいろやってから設定を反映したい場合、こちらをオーバーライド<br>
 	 */
 	protected HibDBUnit(){
+		/* オーバーライドされずに呼ばれた場合は中断 */
 		if ( this.getClass().getName().equals("HibDBUnit") ){
 			logger.error("must be override HibDBUnit()");
 			fail("must be override HibDBUnit()");
@@ -82,15 +83,9 @@ public abstract class HibDBUnit extends DBTestCase {
 	/** @inheritDoc */
 	public void setUp() throws Exception {
 		logger.info("backup of existing data start");
-		try {
-			this.setting.getBackupObj().backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
-			logger.info("backup of existing data end");
-			super.setUp();
-		} catch ( Exception e ){
-			logger.error("error during backup on SetUp()");
-			fail("error during backup on SetUp()");
-			throw e;
-		}
+		this.setting.getBackupObj().backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
+		logger.info("backup of existing data end");
+		super.setUp();
 	}
 	
 	@After
@@ -98,14 +93,8 @@ public abstract class HibDBUnit extends DBTestCase {
 	public void tearDown() throws Exception{
 		super.tearDown();
 		logger.info("restore of backup data start");
-		try {
-			this.setting.getBackupObj().restore(this.getDatabaseTester());
-			logger.info("restore of backup data end");
-		} catch ( Exception e ){
-			logger.error("error during restore on tearDown()");
-			fail("error during restore on tearDown()");
-			throw e;
-		}
+		this.setting.getBackupObj().restore(this.getDatabaseTester());
+		logger.info("restore of backup data end");
 	}
 
 }
