@@ -31,6 +31,7 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * 継承時にいろいろやってから設定を反映したい場合、こちらをオーバーライド<br>
 	 */
 	protected HibDBUnit(){
+		fail("must be override HibDBUnit()");
 	}
 	
 	/**
@@ -41,7 +42,6 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * @throws Exception 設定オブジェクトにおいて項目抜けなどの例外が発生した場合
 	 */
 	protected HibDBUnit( HibDBUnitSetting setting ) throws Exception {
-		this();
 		this.applySetting(setting);
 	}
 	
