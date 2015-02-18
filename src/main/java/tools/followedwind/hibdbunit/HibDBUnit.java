@@ -84,13 +84,13 @@ public abstract class HibDBUnit extends DBTestCase {
 		logger.info("backup of existing data start");
 		try {
 			this.setting.getBackupObj().backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
+			logger.info("backup of existing data end");
+			super.setUp();
 		} catch ( Exception e ){
 			logger.error("error during backup on SetUp()");
 			fail("error during backup on SetUp()");
 			throw e;
 		}
-		logger.info("backup of existing data end");
-		super.setUp();
 	}
 	
 	@After
@@ -100,12 +100,12 @@ public abstract class HibDBUnit extends DBTestCase {
 		logger.info("restore of backup data start");
 		try {
 			this.setting.getBackupObj().restore(this.getDatabaseTester());
+			logger.info("restore of backup data end");
 		} catch ( Exception e ){
 			logger.error("error during restore on tearDown()");
 			fail("error during restore on tearDown()");
 			throw e;
 		}
-		logger.info("restore of backup data end");
 	}
 
 }
