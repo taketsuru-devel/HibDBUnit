@@ -82,7 +82,13 @@ public abstract class HibDBUnit extends DBTestCase {
 	/** @inheritDoc */
 	public void setUp() throws Exception {
 		logger.info("backup of existing data start");
-		this.setting.getBackupObj().backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
+		try {
+			this.setting.getBackupObj().backup(this.getDataSet().getTableNames(), this.getDatabaseTester());
+		} catch ( Exception e ){
+			logger.error("error during backup on SetUp()");
+			fail("error during backup on SetUp()");
+			throw e;
+		}
 		logger.info("backup of existing data end");
 		super.setUp();
 	}
@@ -92,7 +98,13 @@ public abstract class HibDBUnit extends DBTestCase {
 	public void tearDown() throws Exception{
 		super.tearDown();
 		logger.info("restore of backup data start");
-		this.setting.getBackupObj().restore(this.getDatabaseTester());
+		try {
+			this.setting.getBackupObj().restore(this.getDatabaseTester());
+		} catch ( Exception e ){
+			logger.error("error during restore on tearDown()");
+			fail("error during restore on tearDown()");
+			throw e;
+		}
 		logger.info("restore of backup data end");
 	}
 
