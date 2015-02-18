@@ -31,8 +31,10 @@ public abstract class HibDBUnit extends DBTestCase {
 	 * 継承時にいろいろやってから設定を反映したい場合、こちらをオーバーライド<br>
 	 */
 	protected HibDBUnit(){
-		logger.error("must be override HibDBUnit()");
-		fail("must be override HibDBUnit()");
+		if ( this.getClass().getName().equals("HibDBUnit") ){
+			logger.error("must be override HibDBUnit()");
+			fail("must be override HibDBUnit()");
+		}
 	}
 	
 	/**

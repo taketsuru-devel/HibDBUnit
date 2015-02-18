@@ -23,6 +23,7 @@ import tools.followedwind.hibdbunit.HibDBUnitSetting;
  * @version 1.0
  */
 public class HibDBUnitTest extends HibDBUnit {
+
 	public HibDBUnitTest(){
 		try {
 			super.applySetting(new HibDBUnitSetting()
