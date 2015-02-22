@@ -25,23 +25,18 @@ Then create test method and run JUnit test.<br>
 # Dependencies
 このパッケージは以下のパッケージを必要とします。<br>
 mavenのgroupid、versionを記載しています。<br>
-* org.dbUnit 2.5.0
-* org.hibernate 4.3.7.Final
-* org.slf4j 1.7.10
-* ch.qos.logback 1.1.2
-* commons-logging 1.2
-* mysql 5.1.34
-
-commons-logging、mysql-connecter-javaはテストクラスを分離して削除する予定です。<br>
 
 This package depends on these packages.<br>
 Descriptions are groupid and version of maven.<br>
+
 * org.dbUnit 2.5.0
 * org.hibernate 4.3.7.Final
 * org.slf4j 1.7.10
 * ch.qos.logback 1.1.2
-* commons-logging 1.2
+
+以下のパッケージはサンプルのテストコードの実行に必要です。<br>
+(HibDBUnit自身のコンパイル、実行には不要なためコメントアウトしています)<br>
+Sample test code depends on this package.<br>
+( comment out because there is no need to compile and execute HibDBUnit )<br>
+
 * mysql 5.1.34
-
-I will delete commons-logging and mysql-connecter-java by separating test class.
-
